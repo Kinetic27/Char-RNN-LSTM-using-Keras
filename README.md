@@ -27,7 +27,7 @@ $ python train.py --input 텍본.txt --epochs 1000 --resume
 $ python sample.py 100
 ```
 
-시작 시드 단어 및 지정특정 글자수 만큼 뽑기
+시작 시드 단어 지정 및 특정 글자수 만큼 뽑기
 ```
 $ python sample.py 380 --len 200 --seed "테스트"
 ```
@@ -39,6 +39,6 @@ $ python graph.py 100
 
 학습 loss/accuracy는 `logs/training_log.csv`에 저장이 됩니다
 
-학습 모델(weight 포함)은 `model`에 저장이 되고, 'sample.py`에서 샘플을 추출할 때 사용됩니다.
+학습 모델(weight 포함)은 `model`에 저장이 되고, `sample.py`에서 샘플을 추출할 때 사용됩니다.
 
 또한 `acc`와 `loss`에는 각 step의 accuracy와 loss가 기록되며 이를 이용하여 `graph.py`에서 정교한 그래프를 그릴 수 있습니다.
