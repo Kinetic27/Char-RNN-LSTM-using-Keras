@@ -102,6 +102,7 @@ def train(train_text, epochs=100, save_freq=10, resume=False):
             batch_size = len(train_text) // BATCH_SIZE // SEQ_LENGTH  # 한 epoch는 몇 step?
 
             step = epoch * batch_size + i + 1  # 현재 몇 step 실행중?
+
             if step - resume_epoch * batch_size == 1:
                 print("start!")
                 old_time = time.time()
