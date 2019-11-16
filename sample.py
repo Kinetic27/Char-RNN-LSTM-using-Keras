@@ -7,7 +7,8 @@ from keras.models import Sequential
 from model import load_weights
 
 DATA_DIR = './kdata'
-MODEL_DIR = './model'
+MODEL_DIR = 'model'
+BASE_DIR = ''
 
 
 def build_sample_model(vocab_size):
@@ -25,15 +26,15 @@ def build_sample_model(vocab_size):
 
 
 def sample(epoch, header, num_chars):
-    with open(os.path.join(MODEL_DIR, 'char_to_idx.json'), 'r') as f:
+    with open(os.path.join(BASE_DIR, MODEL_DIR, 'char_to_idx.json'), 'r') as f:
         char_to_idx = json.load(f)
 
     idx_to_char = {i: ch for (ch, i) in list(char_to_idx.items())}
     vocab_size = len(char_to_idx)
 
     model = build_sample_model(vocab_size)
-    load_weights(epoch, model)
-    model.save(os.path.join(MODEL_DIR, 'model.{}.h5'.format(epoch)))
+    load_weights(BASE_DIR, epoch, model)
+    model.save(os.path.join(BASE_DIR, MODEL_DIR, 'model.{}.h5'.format(epoch)))
 
     sampled = [char_to_idx[c] for c in header]
 
@@ -58,8 +59,11 @@ def sample(epoch, header, num_chars):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='모델에서 샘플을 뽑아냄')
     parser.add_argument('epoch', type=int, help='샘플을 뽑을 epoch')
+    parser.add_argument('--input', default='sample.txt', help='샘플링시킬 파일 이름')
     parser.add_argument('--seed', default='', help='시작 단어 지정')
     parser.add_argument('--len', type=int, default=512, help='글자수 지정 (기본값 512)')
     args = parser.parse_args()
+
+    BASE_DIR = args.input
 
     print(sample(args.epoch, args.seed, args.len))
