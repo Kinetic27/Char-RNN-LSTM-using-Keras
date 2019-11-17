@@ -49,7 +49,7 @@ def make_subplot(data, sub_locate, title, y_name, use_mean, use_medfilt):
 
 def loss_acc_graph(datas, use_medfilt):
     loss, acc, use_mean = datas
-    print('loss : ', len(loss))
+
     make_subplot(loss, 211, 'Model Loss', 'loss', use_mean, use_medfilt)
 
     make_subplot(acc, 212, 'Model Acc', 'acc', use_mean, use_medfilt)
